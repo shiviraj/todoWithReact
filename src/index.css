@@ -11,3 +11,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.app {
+  width: 600px;
+  margin: 0 auto;
+}
+.item {
+  display: flex;
+  margin: 4px;
+}
+.item > div:nth-child(2) {
+  margin-left: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.complete + div {
+  text-decoration: line-through;
+}
+
+.complete,
+.incomplete {
+  height: 20px;
+  width: 10px;
+}
+.complete {
+  background-color: mediumseagreen;
+}
+.incomplete {
+  background-color: lightblue;
+}
+
+input {
+  outline: none;
+  padding: 4px;
+  font-size: 18px;
+}
+.error {
+  font-size: 14px;
+  font-style: italic;
+}
