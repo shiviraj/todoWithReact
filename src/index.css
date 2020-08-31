@@ -25,19 +25,23 @@ code {
   font-size: 18px;
 }
 
-.complete + div {
+.done + div {
   text-decoration: line-through;
 }
 
-.complete,
-.incomplete {
+.todo,
+.doing,
+.done {
   height: 20px;
   width: 10px;
 }
-.complete {
+.done {
   background-color: mediumseagreen;
 }
-.incomplete {
+.doing {
+  background-color: orange;
+}
+.todo {
   background-color: lightblue;
 }
 
