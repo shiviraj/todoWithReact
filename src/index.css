@@ -55,6 +55,10 @@ input {
   font-style: italic;
 }
 
+.title h1 {
+  cursor: pointer;
+}
+
 .title form {
   margin: 20px 0;
 }
