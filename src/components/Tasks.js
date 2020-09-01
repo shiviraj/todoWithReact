@@ -1,9 +1,9 @@
 import React from 'react';
-import Item from './Item';
+import Task from './Task';
 
 export default (props) => {
   const list = props.items.map((item, index) => (
-    <Item
+    <Task
       key={index}
       handleClick={() => props.handleClick(index)}
       value={item}

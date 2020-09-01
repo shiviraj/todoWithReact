@@ -54,3 +54,11 @@ input {
   font-size: 14px;
   font-style: italic;
 }
+
+.title form {
+  margin: 20px 0;
+}
+.title input {
+  font-size: 28px;
+  font-weight: 600;
+}

@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Todo from './components/Todo';
+import TodoList from './components/TodoList';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Todo />
+    <TodoList />
   </React.StrictMode>,
   document.getElementById('root')
 );

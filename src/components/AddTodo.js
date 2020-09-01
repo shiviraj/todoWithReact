@@ -3,7 +3,7 @@ import React from 'react';
 class AddItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: '', error: undefined };
+    this.state = { value: props.value, error: undefined };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
