@@ -7,23 +7,23 @@ import { nextState, defaultState } from './statuses';
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { items: [], title: 'Todo' };
+    this.state = { list: [], title: 'Todo' };
     this.handleAddItem = this.handleAddItem.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
   }
 
   handleClick(id) {
-    const newItems = this.state.items.map((item, index) => {
-      if (id === index) item.status = nextState(item.status);
-      return item;
+    this.setState((state) => {
+      const newList = state.list.map((item) => ({ ...item }));
+      newList[id].status = nextState(newList[id].status);
+      return { list: newList };
     });
-    this.setState({ items: newItems });
   }
 
   handleAddItem(item) {
-    this.setState(({ items }) => ({
-      items: items.concat({ name: item, status: defaultState() }),
+    this.setState(({ list }) => ({
+      list: list.concat({ name: item, status: defaultState() }),
     }));
   }
 
@@ -39,7 +39,7 @@ class TodoList extends React.Component {
           title={this.state.title}
           default={this.state.title}
         />
-        <Tasks items={this.state.items} handleClick={this.handleClick} />
+        <Tasks list={this.state.list} handleClick={this.handleClick} />
         <AddTodo onSubmit={this.handleAddItem} value="" />
       </div>
     );

@@ -29,6 +29,7 @@ class AddItem extends React.Component {
           type="text"
           value={this.state.value}
           onChange={this.handleChange}
+          autoFocus
         />
       </form>
     );

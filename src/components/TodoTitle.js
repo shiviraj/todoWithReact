@@ -4,30 +4,29 @@ import AddTodo from './AddTodo';
 class TodoTitle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isInputOpen: false, value: props.title };
-    this.toggleStyle = this.toggleStyle.bind(this);
+    this.state = { isEditable: false };
+    this.toggleEditable = this.toggleEditable.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
   }
 
-  toggleStyle() {
-    this.setState(({ isInputOpen }) => ({ isInputOpen: !isInputOpen }));
+  toggleEditable() {
+    this.setState(({ isEditable }) => ({ isEditable: !isEditable }));
   }
 
   handleTitle(title) {
     this.props.handleTitle(title);
-    this.toggleStyle();
-    this.setState(() => ({ value: title }));
+    this.toggleEditable();
   }
 
   render() {
-    const content = <h1 onClick={this.toggleStyle}>{this.state.value}</h1>;
+    const content = <h1 onClick={this.toggleEditable}>{this.props.title}</h1>;
 
     const input = (
-      <AddTodo onSubmit={this.handleTitle} value={this.state.value} />
+      <AddTodo onSubmit={this.handleTitle} value={this.props.title} />
     );
 
     return (
-      <div className="title">{this.state.isInputOpen ? input : content}</div>
+      <div className="title">{this.state.isEditable ? input : content}</div>
     );
   }
 }
