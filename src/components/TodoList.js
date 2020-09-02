@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'uuid';
 import TodoTitle from './TodoTitle';
 import Tasks from './Tasks';
 import AddTodo from './AddTodo';
@@ -15,23 +16,22 @@ class TodoList extends React.Component {
   }
 
   handleClick(id) {
-    this.setState((state) => {
-      const newList = state.list.map((item) => ({ ...item }));
-      newList[id].status = nextState(newList[id].status);
-      return { list: newList };
+    this.setState(({ list }) => {
+      const index = list.findIndex((item) => item.id === id);
+      list[index].status = nextState(list[index].status);
+      return { list };
     });
   }
 
   handleRemove(id) {
-    this.setState((state) => {
-      const newList = state.list.filter((_item, index) => index !== id);
-      return { list: newList };
+    this.setState(({ list }) => {
+      return { list: list.filter((item) => item.id !== id) };
     });
   }
 
-  handleAddItem(item) {
+  handleAddItem(name) {
     this.setState(({ list }) => ({
-      list: list.concat({ name: item, status: defaultState() }),
+      list: list.concat({ id: uuid(), name, status: defaultState() }),
     }));
   }
 
