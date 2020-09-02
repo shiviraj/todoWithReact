@@ -11,12 +11,20 @@ class TodoList extends React.Component {
     this.handleAddItem = this.handleAddItem.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   handleClick(id) {
     this.setState((state) => {
       const newList = state.list.map((item) => ({ ...item }));
       newList[id].status = nextState(newList[id].status);
+      return { list: newList };
+    });
+  }
+
+  handleRemove(id) {
+    this.setState((state) => {
+      const newList = state.list.filter((_item, index) => index !== id);
       return { list: newList };
     });
   }
@@ -39,7 +47,11 @@ class TodoList extends React.Component {
           title={this.state.title}
           default={this.state.title}
         />
-        <Tasks list={this.state.list} handleClick={this.handleClick} />
+        <Tasks
+          list={this.state.list}
+          handleClick={this.handleClick}
+          handleRemove={this.handleRemove}
+        />
         <AddTodo onSubmit={this.handleAddItem} value="" />
       </div>
     );

@@ -12,47 +12,8 @@ code {
     monospace;
 }
 .app {
-  width: 600px;
+  width: 360px;
   margin: 0 auto;
-}
-.item {
-  display: flex;
-  margin: 4px;
-}
-.item > div:nth-child(2) {
-  margin-left: 5px;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.done + div {
-  text-decoration: line-through;
-}
-
-.todo,
-.doing,
-.done {
-  height: 20px;
-  width: 10px;
-}
-.done {
-  background-color: mediumseagreen;
-}
-.doing {
-  background-color: orange;
-}
-.todo {
-  background-color: lightblue;
-}
-
-input {
-  outline: none;
-  padding: 4px;
-  font-size: 18px;
-}
-.error {
-  font-size: 14px;
-  font-style: italic;
 }
 
 .title h1 {
@@ -65,4 +26,50 @@ input {
 .title input {
   font-size: 28px;
   font-weight: 600;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+}
+.task {
+  margin: 4px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.task::before {
+  content: '';
+  padding: 0 5px;
+  margin-right: 4px;
+}
+.done::before {
+  background-color: mediumseagreen;
+}
+.doing::before {
+  background-color: orange;
+}
+.todo::before {
+  background-color: lightblue;
+}
+.remove {
+  cursor: pointer;
+  visibility: hidden;
+}
+.item:hover .remove {
+  visibility: visible;
+}
+
+input {
+  outline: none;
+  padding: 4px;
+  font-size: 18px;
+}
+.error {
+  font-size: 14px;
+  font-style: italic;
 }

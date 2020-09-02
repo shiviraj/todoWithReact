@@ -6,6 +6,7 @@ export default (props) => {
     <Task
       key={index}
       handleClick={() => props.handleClick(index)}
+      handleRemove={() => props.handleRemove(index)}
       value={item}
     />
   ));
