@@ -13,6 +13,7 @@ class TodoList extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
   }
 
   handleClick(id) {
@@ -27,6 +28,10 @@ class TodoList extends React.Component {
     this.setState(({ list }) => {
       return { list: list.filter((item) => item.id !== id) };
     });
+  }
+
+  handleRemoveAll() {
+    this.setState({ list: [] });
   }
 
   handleAddItem(name) {
@@ -45,7 +50,7 @@ class TodoList extends React.Component {
         <TodoTitle
           handleTitle={this.handleTitle}
           title={this.state.title}
-          default={this.state.title}
+          handleRemoveAll={this.handleRemoveAll}
         />
         <Tasks
           list={this.state.list}

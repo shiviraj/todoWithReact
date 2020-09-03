@@ -19,7 +19,14 @@ class TodoTitle extends React.Component {
   }
 
   render() {
-    const content = <h1 onClick={this.toggleEditable}>{this.props.title}</h1>;
+    const content = (
+      <div>
+        <h1 onClick={this.toggleEditable}>{this.props.title}</h1>
+        <div className="remove-all" onClick={this.props.handleRemoveAll}>
+          X
+        </div>
+      </div>
+    );
 
     const input = (
       <AddTodo onSubmit={this.handleTitle} value={this.props.title} />

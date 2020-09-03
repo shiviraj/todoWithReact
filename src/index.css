@@ -28,6 +28,19 @@ code {
   font-weight: 600;
 }
 
+.title div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.remove-all {
+  visibility: hidden;
+  cursor: pointer;
+}
+.title:hover .remove-all {
+  visibility: visible;
+}
+
 .item {
   display: flex;
   justify-content: space-between;
