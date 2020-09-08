@@ -1,41 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddTodo from './AddTodo';
 
-class TodoTitle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isEditable: false };
-    this.toggleEditable = this.toggleEditable.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
-  }
+const TodoTitle = (props) => {
+  const [isEditable, setIsEditable] = useState(false);
 
-  toggleEditable() {
-    this.setState(({ isEditable }) => ({ isEditable: !isEditable }));
-  }
+  const toggleEditable = () => setIsEditable((e) => !e);
 
-  handleTitle(title) {
-    this.props.handleTitle(title);
-    this.toggleEditable();
-  }
+  const handleTitle = (title) => {
+    props.handleTitle(title);
+    toggleEditable();
+  };
 
-  render() {
-    const content = (
-      <div>
-        <h1 onClick={this.toggleEditable}>{this.props.title}</h1>
-        <div className="remove-all" onClick={this.props.handleRemoveAll}>
-          X
-        </div>
+  const content = (
+    <div>
+      <h1 onClick={toggleEditable}>{props.title}</h1>
+      <div className="remove-all" onClick={props.handleRemoveAll}>
+        X
       </div>
-    );
+    </div>
+  );
 
-    const input = (
-      <AddTodo onSubmit={this.handleTitle} value={this.props.title} />
-    );
+  const input = <AddTodo onSubmit={handleTitle} value={props.title} />;
 
-    return (
-      <div className="title">{this.state.isEditable ? input : content}</div>
-    );
-  }
-}
+  return <div className="title">{isEditable ? input : content}</div>;
+};
 
 export default TodoTitle;

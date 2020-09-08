@@ -1,66 +1,31 @@
-import React from 'react';
-import uuid from 'uuid';
+import React, { useReducer } from 'react';
 import TodoTitle from './TodoTitle';
 import Tasks from './Tasks';
 import AddTodo from './AddTodo';
-import { nextState, defaultState } from './statuses';
+import reducer from './reducer';
 
-class TodoList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { list: [], title: 'Todo' };
-    this.handleAddItem = this.handleAddItem.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-    this.handleRemoveAll = this.handleRemoveAll.bind(this);
-  }
+const initialState = { title: 'Todo', list: [] };
 
-  handleClick(id) {
-    this.setState(({ list }) => {
-      const index = list.findIndex((item) => item.id === id);
-      list[index].status = nextState(list[index].status);
-      return { list };
-    });
-  }
+const TodoList = () => {
+  const [{ title, list }, dispatch] = useReducer(reducer, initialState);
 
-  handleRemove(id) {
-    this.setState(({ list }) => {
-      return { list: list.filter((item) => item.id !== id) };
-    });
-  }
+  const changeStatus = (id) => dispatch({ type: 'UPDATE_STATUS', id });
+  const removeTask = (id) => dispatch({ type: 'REMOVE_TASK', id });
+  const handleAddItem = (name) => dispatch({ type: 'ADD_TODO', name });
+  const handleTitle = (newTitle) =>
+    dispatch({ type: 'UPDATE_TITLE', title: newTitle });
 
-  handleRemoveAll() {
-    this.setState({ list: [] });
-  }
-
-  handleAddItem(name) {
-    this.setState(({ list }) => ({
-      list: list.concat({ id: uuid(), name, status: defaultState() }),
-    }));
-  }
-
-  handleTitle(title) {
-    this.setState({ title });
-  }
-
-  render() {
-    return (
-      <div className="app">
-        <TodoTitle
-          handleTitle={this.handleTitle}
-          title={this.state.title}
-          handleRemoveAll={this.handleRemoveAll}
-        />
-        <Tasks
-          list={this.state.list}
-          handleClick={this.handleClick}
-          handleRemove={this.handleRemove}
-        />
-        <AddTodo onSubmit={this.handleAddItem} value="" />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="app">
+      <TodoTitle
+        handleTitle={handleTitle}
+        handleRemoveAll={() => dispatch({ type: 'REMOVE_ALL' })}
+        title={title}
+      />
+      <Tasks list={list} handleClick={changeStatus} handleRemove={removeTask} />
+      <AddTodo onSubmit={handleAddItem} value="" />
+    </div>
+  );
+};
 
 export default TodoList;
